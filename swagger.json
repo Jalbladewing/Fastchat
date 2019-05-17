@@ -1,0 +1,155 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "description": "Documentación de Loc8r API",
+    "version": "1.0.0",
+    "title": "Loc8r REST API",
+    "termsOfService": "http://swagger.io/terms/",
+    "contact": {
+      "email": "apiteam@swagger.io"
+    },
+    "license": {
+      "name": "Apache 2.0",
+      "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
+    }
+  },
+  "host": "localhost:3000",
+  "basePath": "/api",
+  "tags": [
+    {
+      "name": "location",
+      "description": "Todo sobre los establecimientos."
+    },
+    {
+      "name": "review",
+      "description": "Comentarios sobre los establecimientos."
+    }
+  ],
+  "schemes": [
+    "https",
+    "http"
+  ],
+  "paths": {
+    "/locations/{locationid}": {
+      "get": {
+        "tags": [
+          "location"
+        ],
+        "summary": "Finds locations by ID",
+        "description": "Bla bla bla",
+        "operationId": "locationsFindById",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "locationid",
+            "in": "path",
+            "description": "Id of location to return",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/Location"
+            }
+          }
+        },
+        "security": [
+          {
+            "petstore_auth": [
+              "write:pets",
+              "read:pets"
+            ]
+          }
+        ]
+      }
+    }
+  },
+  "securityDefinitions": {
+    "petstore_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "http://petstore.swagger.io/oauth/dialog",
+      "flow": "implicit",
+      "scopes": {
+        "write:pets": "modify pets in your account",
+        "read:pets": "read your pets"
+      }
+    },
+    "api_key": {
+      "type": "apiKey",
+      "name": "api_key",
+      "in": "header"
+    }
+  },
+  "definitions": {
+    "Location": {
+      "type": "object",
+      "required": [
+        "name"
+      ],
+      "properties": {
+        "name": {
+          "type": "string",
+          "example": "Romera"
+        },
+        "address": {
+          "type": "string"
+        },
+        "rating": {
+          "type": "number",
+          "description": "Clasificación entre 0 y 5"
+        },
+        "facilities": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "coordinates": {
+          "type": "number"
+        },
+        "openingTimes": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/OpeningTime"
+          }
+        }
+      },
+      "xml": {
+        "name": "Location"
+      }
+    },
+    "OpeningTime": {
+      "type": "object",
+      "required": [
+        "name"
+      ],
+      "properties": {
+        "days": {
+          "type": "string",
+          "example": "lunes"
+        },
+        "opening": {
+          "type": "string"
+        },
+        "closing": {
+          "type": "string"
+        },
+        "closed": {
+          "type": "boolean"
+        }
+      },
+      "xml": {
+        "name": "OpeningTime"
+      }
+    }
+  },
+  "externalDocs": {
+    "description": "Find out more about Swagger",
+    "url": "http://swagger.io"
+  }
+}

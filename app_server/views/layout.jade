@@ -1,0 +1,25 @@
+doctype html
+html
+  head
+    meta(name='viewport', content='width=device-width, initial-scale=1.0')
+    title= title
+    link(rel='stylesheet', href='/bootstrap/css/bootstrap.css')
+    link(rel='stylesheet', href='/stylesheets/style.css')
+    link(rel='stylesheet', href='/stylesheets/simple-sidebar.css')
+  body
+   #wrapper.d-flex
+    #sidebar-wrapper.bg-light.border-right
+      .sidebar-heading FastChat
+      .list-group.list-group-flush
+        each location in locations
+          a.list-group-item.list-group-item-action.bg-light(href='/')= location.name
+    .container.chatContainer
+      block content
+
+          
+      footer
+        .row
+          .col-xs-12
+            small &copy; Master Tecnologías y Aplicaciones Informáticas 2019
+script(src='/javascripts/jquery.min.js')
+script(src='/bootstrap/js/bootstrap.js')

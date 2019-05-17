@@ -1,0 +1,15 @@
+extends layout
+
+include _includes/sharedHTMLfunctions
+
+.page-content-wrapper
+    block content
+        .row
+            .col-xs-12.col-sm-12
+                .row.list-group
+                    each location in locations
+                        .col-xs-12.message
+                            .messageTitle
+                                p.messageUsername= location.name
+                                span.pull-right.messageTime 8:11 AM
+                            p.messageBody.address= location.address
