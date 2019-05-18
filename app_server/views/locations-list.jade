@@ -2,14 +2,22 @@ extends layout
 
 include _includes/sharedHTMLfunctions
 
-.page-content-wrapper
-    block content
-        .row
-            .col-xs-12.col-sm-12
-                .row.list-group
-                    each location in locations
-                        .col-xs-12.message
-                            .messageTitle
-                                p.messageUsername= location.name
-                                span.pull-right.messageTime 8:11 AM
-                            p.messageBody.address= location.address
+block content
+    #page-content-wrapper
+        nav.navbar.navbar-expand-lg.navbar-light.bg-light.border-bottom
+            .headerContent
+                p.channelTitle # Starcups
+                p.channelDescription Starcups description a bit long for testing purpouses.
+            button.navbar-toggler(type='button', data-toggle='collapse', data-target='#navbarSupportedContent', aria-controls='navbarSupportedContent', aria-expanded='false', aria-label='Toggle navigation')
+                span.navbar-toggler-icon
+        .container.chatContainer
+            .row
+                .col-xs-12.col-sm-12
+                    .row.list-group
+                        each channel in channels
+                            .col-sm-12.message
+                                .messageContent
+                                    .messageTitle
+                                        p.messageUsername= channel.name
+                                        span.pull-right.messageTime 8:11 AM
+                                    p.messageBody.address= channel.description

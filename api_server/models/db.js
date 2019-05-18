@@ -1,6 +1,6 @@
 var mongoose = require('mongoose');
 
-var dbURI = 'mongodb://localhost/Loc8r';
+var dbURI = 'mongodb://localhost/fastchat';
 mongoose.connect(dbURI);
 
 // CONNECTION EVENTS
@@ -35,4 +35,4 @@ process.on('SIGINT', function() {
     });
 });
 
-require('./locations');
+require('./channels');

@@ -12,14 +12,14 @@ var renderLocationsPage = function(req, res, responseBody) {
             strapline: 'Find places to work with wifi near you!'
         },
         sidebar: "Looking for wifi and a seat? Loc8r helps you find places to work when out and about. Perhaps with coffee, cake or a pint? Let Loc8r help you find the place you're looking for.",
-        locations: responseBody 
+        channels: responseBody 
     });
   
   };
 
 /* GET home page. */
 module.exports.homelist = function(req, res, next) {
-    var path = '/locations';
+    var path = '/channels';
     var requestOptions = { 
         url: apiOptions.server + path,
         method: 'GET',

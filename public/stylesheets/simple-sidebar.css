@@ -22,6 +22,7 @@ body {
   
   #page-content-wrapper {
     min-width: 100vw;
+    width: 100%;
   }
   
   #wrapper.toggled #sidebar-wrapper {

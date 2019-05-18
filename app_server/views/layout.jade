@@ -11,10 +11,9 @@ html
     #sidebar-wrapper.bg-light.border-right
       .sidebar-heading FastChat
       .list-group.list-group-flush
-        each location in locations
-          a.list-group-item.list-group-item-action.bg-light(href='/')= location.name
-    .container.chatContainer
-      block content
+        each channel in channels
+          a.list-group-item.list-group-item-action.bg-light(href='/')= channel.name
+    block content
 
           
       footer

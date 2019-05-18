@@ -1,23 +1,23 @@
 var express = require('express');
 var router = express.Router();
 
-var ctrlLocations = require('../controllers/locations');
-var ctrlReviews = require('../controllers/reviews');
+var ctrlChannels = require('../controllers/channels');
+var ctrlMessages = require('../controllers/messages');
 
-/* Locations pages. */
-router.get('/locations/findOne', ctrlLocations.findOne);
+/* Channels pages. */
+router.get('/channels/findOne', ctrlChannels.findOne);
 
-router.get('/locations', ctrlLocations.locationsList);
-router.post('/locations', ctrlLocations.locationsCreate);
-router.get('/locations/:locationid', ctrlLocations.locationsFindById);
-router.put('/locations/:locationid', ctrlLocations.locationsUpdate);
-router.delete('/locations/:locationid', ctrlLocations.locationsDelete);
+router.get('/channels', ctrlChannels.channelsList);
+router.post('/channels', ctrlChannels.channelsCreate);
+router.get('/channels/:channelid', ctrlChannels.channelsFindById);
+router.put('/channels/:channelid', ctrlChannels.channelsUpdate);
+router.delete('/channels/:channelid', ctrlChannels.channelsDelete);
 
 /* Reviews pages. */
-router.get('/locations/:locationid/reviews', ctrlReviews.reviewsList);
-router.get('/locations/:locationid/reviews/:reviewId', ctrlReviews.reviewsFindById);
-router.put('/locations/:locationid/reviews/:reviewId', ctrlReviews.reviewsUpdate);
-router.post('/locations/:locationid/reviews', ctrlReviews.reviewsCreate);
-router.delete('/locations/:locationid/reviews/:reviewId', ctrlReviews.reviewsDelete);
+router.get('/channels/:channelid/messages', ctrlMessages.messagesList);
+router.get('/channels/:channelid/messages/:messageid', ctrlMessages.messagesFindById);
+router.put('/channels/:channelid/messages/:messageid', ctrlMessages.messagesUpdate);
+router.post('/channels/:channelid/messages', ctrlMessages.messagesCreate);
+router.delete('/channels/:channelid/messages/:messageid', ctrlMessages.messagesDelete);
 
 module.exports = router;
