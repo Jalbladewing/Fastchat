@@ -86,6 +86,48 @@ module.exports.messagesCreate = function(req, res) {
     .send({message: 'messagesCreate', channelid: req.params.channelid});
 };
 
+module.exports.messagesCreate = function(req, res) {
+  if (req.params.channelid) {
+    Cha.findById(req.params.channelid).select('messages').exec(
+        function(err, channel) {
+          if (err) {
+            return res.status(400).send(err);
+          } else {
+            doAddMessage(req, res, channel);
+          }
+        }
+    );
+  } else {
+    return res
+    .status(404)
+    .send({message: 'Not found, channelid required'});
+  }
+};
+
+var doAddMessage = function(req, res, channel) {
+  if (!channel) {
+    return res
+    .status(404)
+    .send({message: 'channelid not found'});
+  } else {
+    channel.messages.push({
+      author: req.body.author,
+      messageText: req.body.messageText,
+    });
+    channel.save(function(err, channel) {
+      var thisMessage;
+      if (err) {
+        return res.status(400).send(err);
+      } else {
+        thisMessage = channel.messages[channel.messages.length - 1];
+        return res
+      .status(201)
+      .send(thisMessage);
+      }
+    });
+  }
+};
+
 module.exports.messagesDelete = function(req, res) {
     return res
     .status(204)
