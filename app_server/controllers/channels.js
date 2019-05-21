@@ -30,6 +30,23 @@ var apiOptions = {
     });
   
   };
+
+  var renderNewChannelPage = function(req, res, responseBodyChannelList) { 
+    res.render('newChannel', {
+        title: 'Fastchat',
+        channels: responseBodyChannelList,
+    });
+  
+  };
+
+  var renderEditChannelPage = function(req, res, responseBodyChannelList, responseBodyChannel) { 
+    res.render('editChannel', {
+        title: 'Fastchat',
+        channels: responseBodyChannelList,
+        channel: responseBodyChannel
+    });
+  
+  };
   
 
 /* GET home page. */
@@ -73,28 +90,6 @@ module.exports.enterChannel = function(req, res, next) {
     });
 }
 
-/* POST Add message to the chat*/
-module.exports.addMessage = function(req, res){
-    var path = '/channels/' + req.params.channelid + "/messages";
-    var postData = {
-        author : 'Jose',
-        messageText : req.body.messageText,
-    };
-
-    var requestOptions = { 
-        url: apiOptions.server + path,
-        method: 'Post',
-        json: postData
-    };
-  
-    request(requestOptions, function(err,response,body){
-      if (response.statusCode === 201) {
-          res.redirect('/channel/' + req.params.channelid);
-      }
-  
-    });
-  };
-
   /* GET messages from a channel */
   module.exports.channelMessages = function(req, res, next) {
     var pathChannelList = '/channels';
@@ -122,3 +117,67 @@ module.exports.addMessage = function(req, res){
 
     
 }
+
+/* GET new channel page. */
+module.exports.newChannel = function(req, res, next) {
+    var pathChannelList = '/channels';
+
+    var requestOptionsChannelList = { 
+        url: apiOptions.server + pathChannelList,
+        method: 'GET',
+        json: {},
+        qs: {}
+    };
+
+    request(requestOptionsChannelList, function(err, response, responseBodyChannelList) { 
+        renderNewChannelPage(req, res, responseBodyChannelList); 
+    });
+}
+
+/* GET new channel page. */
+module.exports.editChannel = function(req, res, next) {
+    var pathChannelList = '/channels';
+    var pathChannel = '/channels/' + req.params.channelid;
+
+    var requestOptionsChannelList = { 
+        url: apiOptions.server + pathChannelList,
+        method: 'GET',
+        json: {},
+        qs: {}
+    };
+
+    var requestOptionsChannel = { 
+        url: apiOptions.server + pathChannel,
+        method: 'GET',
+        json: {},
+        qs: {}
+    };
+    request(requestOptionsChannelList, function(err, response, responseBodyChannelList) { 
+        request(requestOptionsChannel, function(err, response, responseBodyChannel) { 
+            renderEditChannelPage(req, res, responseBodyChannelList, responseBodyChannel); 
+        });
+    });
+}
+
+
+/* POST Add message to the chat*/
+module.exports.addMessage = function(req, res){
+    var path = '/channels/' + req.params.channelid + "/messages";
+    var postData = {
+        author : 'Unknown',
+        messageText : req.body.messageText,
+    };
+
+    var requestOptions = { 
+        url: apiOptions.server + path,
+        method: 'Post',
+        json: postData
+    };
+  
+    request(requestOptions, function(err,response,body){
+      if (response.statusCode === 201) {
+          res.redirect('/channel/' + req.params.channelid);
+      }
+  
+    });
+  };

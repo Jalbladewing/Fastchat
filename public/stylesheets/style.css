@@ -7,6 +7,56 @@ a {
   color: #00B7FF;
 }*/
 
+/* SIDEBAR NAVIGATION STYLES */
+
+/* A link that has not been visited */
+.sidebar-heading:link {
+  color: black;
+  text-decoration: none;
+}
+
+/* A link that has been visited */
+.sidebar-heading:visited {
+  color: black;
+  text-decoration: none;
+}
+
+/* A link that is hovered on */
+.sidebar-heading:hover {
+  color: black;
+  text-decoration: none;
+}
+
+/* A link that is selected */
+.sidebar-heading:active {
+  color: black;
+  text-decoration: none;
+}
+
+.buttonEditOverChannel
+{
+  position: relative;
+  bottom: 48%;
+  left: 70%;
+  z-index: 1000;
+  max-width: 30px;
+}
+
+.buttonDeleteOverChannel
+{
+  position: relative;
+  bottom: 48%;
+  left: 71%;
+  z-index: 1000;
+  max-width: 30px;
+}
+
+.center-text
+{
+  text-align: center;
+}
+
+/* CHAT STYLES*/
 .channelTitle
 {
   font-weight: 400;
@@ -137,4 +187,30 @@ a {
   font-family: inherit;
   font-size: .875rem;
   font-size: var(--message-box-text-size);
+}
+
+/* NEW CHANNEL STYLES*/
+
+.inputText
+{
+  border: 0;
+  width: 90%;
+}
+
+.inputTextBox_container
+{
+  padding: .5rem 0;
+  width: 100%;
+}
+
+.input-icon
+{
+  color: #656565;
+  margin-left: 10px;
+  margin-right: 15px;
+}
+
+.form-label
+{
+  font-weight: 550;
 }

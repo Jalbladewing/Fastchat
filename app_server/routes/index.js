@@ -7,6 +7,8 @@ var ctrlOthers = require('../controllers/others');
 router.get('/', ctrlChannels.homelist);
 router.get('/channel/:channelid', ctrlChannels.enterChannel);
 router.get('/messages', ctrlChannels.channelMessages);
+router.get('/newChannel', ctrlChannels.newChannel);
+router.get('/editChannel/:channelid', ctrlChannels.editChannel);
 
 /* Channel POST pages. */
 router.post('/channel/:channelid', ctrlChannels.addMessage);

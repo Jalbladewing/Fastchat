@@ -1,0 +1,26 @@
+extends layout
+
+include _includes/sharedHTMLfunctions
+
+block content
+    #page-content-wrapper
+        .container.chatContainer
+            article.card-body.mx-auto(style='max-width: 600px;')
+                h4 Crear un nuevo canal
+                p Los canales son lugares donde comunicarse con otras personas.
+                form#chatboxForm.form-horizontal(action="", method="post", role="form", style="margin-top: 10%;")
+                    .form-group.input-group
+                        .input-group-prepend
+                            label.form-label Nombre del canal
+                        .rc-message-box
+                            label.inputTextBox_container
+                                i.fas.fa-lock.input-icon
+                                input#chatbox.inputText(name='name', type='text', placeholder='Escriba el nombre del canal', required)
+                    .form-group.input-group
+                        .input-group-prepend
+                            label.form-label Descripción del canal
+                        .rc-message-box
+                            label.inputTextBox_container
+                                i.fas.fa-info-circle.input-icon
+                                input#chatbox.inputText(name='description', type='text', placeholder='Escriba la descripción del canal', required)
+                     button.btn.btn-primary(style="margin-top: 30px;") Crear

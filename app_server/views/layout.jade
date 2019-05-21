@@ -6,16 +6,24 @@ html
     link(rel='stylesheet', href='/bootstrap/css/bootstrap.css')
     link(rel='stylesheet', href='/stylesheets/style.css')
     link(rel='stylesheet', href='/stylesheets/simple-sidebar.css')
+    link(rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css",integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay",crossorigin="anonymous")
   body
    #wrapper.d-flex
     #sidebar-wrapper.bg-light.border-right
-      a.sidebar-heading(href='/')= title
+      a.asome.sidebar-heading(href='/')
+        i.fas.fa-home
+        |       #{title}
       .list-group.list-group-flush
-        a(data-toggle="modal" data-target="#normalModal" class="btn btn-default") Normal
         each channel in channels
-          a.list-group-item.list-group-item-action.bg-light(href='/channel/'+channel._id) # #{channel.name}
-            button(type="button" class="btn btn-danger")
-              span.fa.fa-trash
+          .canal
+            a.list-group-item.list-group-item-action.bg-light(href='/channel/'+channel._id) # #{channel.name}
+            a.btn.btn-sm.btn-primary.buttonEditOverChannel(href='/editChannel/'+channel._id)
+              i.fas.fa-edit.fa-sm
+            button.btn.btn-sm.btn-danger.buttonDeleteOverChannel(data-toggle="modal" data-target="#normalModal")
+              i.fas.fa-trash-alt.fa-sm
+          a.list-group-item.list-group-item-action.bg-light.center-text(href='/newChannel')
+            i.fas.fa-plus-circle.fa-sm
+            |  Nuevo canal
     block content
 
           
