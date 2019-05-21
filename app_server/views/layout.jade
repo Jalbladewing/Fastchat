@@ -9,10 +9,13 @@ html
   body
    #wrapper.d-flex
     #sidebar-wrapper.bg-light.border-right
-      .sidebar-heading FastChat
+      a.sidebar-heading(href='/')= title
       .list-group.list-group-flush
+        a(data-toggle="modal" data-target="#normalModal" class="btn btn-default") Normal
         each channel in channels
-          a.list-group-item.list-group-item-action.bg-light(href='/')= channel.name
+          a.list-group-item.list-group-item-action.bg-light(href='/channel/'+channel._id) # #{channel.name}
+            button(type="button" class="btn btn-danger")
+              span.fa.fa-trash
     block content
 
           
@@ -20,6 +23,21 @@ html
         .row
           .col-xs-12
             small &copy; Master Tecnologías y Aplicaciones Informáticas 2019
+
+
+#normalModal(class="modal fade")
+  div(class="modal-dialog")
+    div(class="modal-content")
+      div(class="modal-header")
+        h5(class="modal-title") Borrar canal
+        button(type="button" class="close" data-dismiss="modal" aria-label="Close" aria-hidden="true") &times;
+      
+      div(class="modal-body")
+        p ¿Estas seguro de querer borrar el canal?
+        div(class="modal-footer")
+          button(type="button" class="btn btn-default" data-dismiss="modal") Cancelar
+          button(type="button" onclick="test()" class="btn btn-danger") Si, borralo!
+
 script(src='/javascripts/jquery.min.js')
 script(src='/bootstrap/js/bootstrap.js')
 script(src='/javascripts/chat.js')

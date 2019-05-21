@@ -80,6 +80,13 @@ a {
 .chatContainer
 {
   max-width: 100%;
+  overflow: hidden;
+}
+
+.chatRow
+{
+  overflow-y: scroll;
+  max-height: 75vh;
 }
 
 .footer

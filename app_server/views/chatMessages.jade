@@ -1,0 +1,8 @@
+.row.list-group
+    each message in messages
+        .col-sm-12.message
+            .messageContent
+                .messageTitle
+                    p.messageUsername= message.author
+                    span.pull-right.messageTime #{moment(message.createdOn).format('MMMM Do YYYY, h:mm:ss a')}
+                p.messageBody.address= message.messageText

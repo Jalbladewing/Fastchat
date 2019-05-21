@@ -1,13 +1,15 @@
 var express = require('express');
 var router = express.Router();
-var ctrlLocations = require('../controllers/locations');
+var ctrlChannels = require('../controllers/channels');
 var ctrlOthers = require('../controllers/others');
 
-/* Locations page. */
-router.get('/', ctrlLocations.homelist);
-router.post('/', ctrlLocations.addMessage);
-router.get('/location', ctrlLocations.locationInfo);
-router.get('/location/review/new', ctrlLocations.addReview);
+/* Channel GET pages. */
+router.get('/', ctrlChannels.homelist);
+router.get('/channel/:channelid', ctrlChannels.enterChannel);
+router.get('/messages', ctrlChannels.channelMessages);
+
+/* Channel POST pages. */
+router.post('/channel/:channelid', ctrlChannels.addMessage);
 
 /* Other pages */
 router.get('/about', ctrlOthers.about);
