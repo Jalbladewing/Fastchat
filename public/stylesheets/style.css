@@ -33,10 +33,15 @@ a {
   text-decoration: none;
 }
 
+.canal
+{
+  max-height: 49px;
+}
+
 .buttonEditOverChannel
 {
   position: relative;
-  bottom: 48%;
+  bottom: 78%;
   left: 70%;
   z-index: 1000;
   max-width: 30px;
@@ -45,7 +50,7 @@ a {
 .buttonDeleteOverChannel
 {
   position: relative;
-  bottom: 48%;
+  bottom: 78%;
   left: 71%;
   z-index: 1000;
   max-width: 30px;

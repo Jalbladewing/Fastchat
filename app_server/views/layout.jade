@@ -19,9 +19,9 @@ html
             a.list-group-item.list-group-item-action.bg-light(href='/channel/'+channel._id) # #{channel.name}
             a.btn.btn-sm.btn-primary.buttonEditOverChannel(href='/editChannel/'+channel._id)
               i.fas.fa-edit.fa-sm
-            button.btn.btn-sm.btn-danger.buttonDeleteOverChannel(data-toggle="modal" data-target="#normalModal")
+            button.btn.btn-sm.btn-danger.buttonDeleteOverChannel.open-DeleteChannelModal(data-toggle="modal" data-target="#normalModal" data-id="#{channel._id}")
               i.fas.fa-trash-alt.fa-sm
-          a.list-group-item.list-group-item-action.bg-light.center-text(href='/newChannel')
+        a.list-group-item.list-group-item-action.bg-light.center-text(href='/newChannel')
             i.fas.fa-plus-circle.fa-sm
             |  Nuevo canal
     block content
@@ -42,9 +42,10 @@ html
       
       div(class="modal-body")
         p ¿Estas seguro de querer borrar el canal?
+        input(type="hidden" id="channelId" value="")
         div(class="modal-footer")
           button(type="button" class="btn btn-default" data-dismiss="modal") Cancelar
-          button(type="button" onclick="test()" class="btn btn-danger") Si, borralo!
+          button(type="button" onclick="deleteChannel()" class="btn btn-danger") Si, borralo!
 
 script(src='/javascripts/jquery.min.js')
 script(src='/bootstrap/js/bootstrap.js')

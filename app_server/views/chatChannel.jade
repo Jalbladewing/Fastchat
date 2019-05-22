@@ -8,6 +8,7 @@ block content
             .headerContent
                 p.channelTitle= channel.name
                 p.channelDescription= channel.description
+                input#channelId( type="hidden", value="#{channel._id}")
             button.navbar-toggler(type='button', data-toggle='collapse', data-target='#navbarSupportedContent', aria-controls='navbarSupportedContent', aria-expanded='false', aria-label='Toggle navigation')
                 span.navbar-toggler-icon
         .container.chatContainer

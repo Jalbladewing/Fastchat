@@ -46,7 +46,7 @@ module.exports.channelsList = function(req, res) {
 module.exports.channelsCreate = function(req, res) {
   Cha.create( {
     name: req.body.name,
-    messageText: req.body.messageText,
+    description: req.body.description,
 }, function(err, channel) {
     
     if(err)
@@ -89,9 +89,43 @@ module.exports.channelsFindById = function(req, res) {
 };
 
 module.exports.channelsUpdate = function(req, res) {
-  return res
-  .status(200)
-  .send({message: 'channelsUpdate', channelid: req.params.channelid});
+  Cha.findById(req.params.channelid,function(err, channel) {
+    if(err)
+    {
+      //Dar respuesta al error
+      return res
+      .status(404)
+      .send({message: 'No channel with this id'});
+    }else
+    {
+      if(!channel)
+      {
+        //Informar que location está vacío
+        return res
+        .status(400)
+        .send({message: 'Bad Request'});
+      }else
+      {
+        channel.name = req.body.name;
+        channel.description = req.body.description;
+
+        channel.save(function(err, location) {
+          if (err) 
+          {
+            return res
+          .status(400)
+          .send({message: 'Bad Request'});
+
+          } else {
+            return res
+            .status(200)
+            .send(channel);
+          }
+        });
+        
+      }
+    }
+  });
 };
 
 module.exports.channelsDelete = function(req, res) {

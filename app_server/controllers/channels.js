@@ -16,7 +16,8 @@ var apiOptions = {
     res.render('chatChannel', {
         title: 'Fastchat',
         channels: responseBodyChannelList,
-        channel: responseBodyChannel
+        channel: responseBodyChannel,
+        myVar: 'My Data'
     });
   
   };
@@ -93,7 +94,7 @@ module.exports.enterChannel = function(req, res, next) {
   /* GET messages from a channel */
   module.exports.channelMessages = function(req, res, next) {
     var pathChannelList = '/channels';
-    var pathMessages = '/channels/5ce03b6d0a1ee63e983e0582/messages';
+    var pathMessages = '/channels/' + req.params.channelid + '/messages';
 
     var requestOptionsChannelList = { 
         url: apiOptions.server + pathChannelList,
@@ -177,6 +178,69 @@ module.exports.addMessage = function(req, res){
     request(requestOptions, function(err,response,body){
       if (response.statusCode === 201) {
           res.redirect('/channel/' + req.params.channelid);
+      }
+  
+    });
+  };
+
+/* POST Create channel*/
+module.exports.createChannel = function(req, res){
+    var path = '/channels';
+    var postData = {
+        name : req.body.name,
+        description : req.body.description,
+    };
+
+    var requestOptions = { 
+        url: apiOptions.server + path,
+        method: 'Post',
+        json: postData
+    };
+  
+    request(requestOptions, function(err,response,body){
+      if (response.statusCode === 201) {
+          res.redirect('/newChannel');
+      }
+  
+    });
+  };
+
+/* PUT Create channel*/
+module.exports.modifyChannel = function(req, res){
+    var path = '/channels/' + req.params.channelid;
+    var putData = {
+        name : req.body.name,
+        description : req.body.description,
+    };
+
+    var requestOptions = { 
+        url: apiOptions.server + path,
+        method: 'Put',
+        json: putData
+    };
+  
+    request(requestOptions, function(err,response,body){
+      if (response.statusCode === 200) {
+          res.redirect('/editChannel/' + req.params.channelid);
+      }
+  
+    });
+  };
+
+/* DELETE Remove channel*/
+module.exports.deleteChannel = function(req, res){
+    var path = '/channels/' + req.params.channelid;
+
+    var requestOptions = { 
+        url: apiOptions.server + path,
+        method: 'Delete',
+        json: {},
+        qs: {}
+    };
+  
+    request(requestOptions, function(err,response,body){
+      if (response.statusCode === 204) {
+          res.redirect('/');
       }
   
     });

@@ -23,4 +23,4 @@ block content
                             label.inputTextBox_container
                                 i.fas.fa-info-circle.input-icon
                                 input#chatbox.inputText(name='description', type='text', placeholder='Escriba la descripción del canal', value="#{channel.description}", required)
-                     button.btn.btn-primary(style="margin-top: 30px;") Editar
+                     button.btn.btn-primary(style="margin-top: 30px;", onclick="editChannel(event, '#{channel._id}')") Editar
