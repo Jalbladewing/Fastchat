@@ -74,18 +74,6 @@ module.exports.messagesFindById = function(req, res) {
       });  
 };
 
-module.exports.messagesUpdate = function(req, res) {
-    return res
-    .status(200)
-    .send({message: 'messagesUpdate', channelid: req.params.channelid, messageid: req.params.messageid});
-};
-
-module.exports.messagesCreate = function(req, res) {
-    return res
-    .status(201)
-    .send({message: 'messagesCreate', channelid: req.params.channelid});
-};
-
 module.exports.messagesCreate = function(req, res) {
   if (req.params.channelid) {
     Cha.findById(req.params.channelid).select('messages').exec(
@@ -126,10 +114,4 @@ var doAddMessage = function(req, res, channel) {
       }
     });
   }
-};
-
-module.exports.messagesDelete = function(req, res) {
-    return res
-    .status(204)
-    .send({message: 'messagesDelete', channelid: req.params.channelid, messageid: req.params.messageid});
 };

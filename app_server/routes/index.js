@@ -1,7 +1,6 @@
 var express = require('express');
 var router = express.Router();
 var ctrlChannels = require('../controllers/channels');
-var ctrlOthers = require('../controllers/others');
 
 /* Channel GET pages. */
 router.get('/', ctrlChannels.homelist);
@@ -21,9 +20,5 @@ router.put('/editChannel/:channelid', ctrlChannels.editChannel);//This is for re
 /* Channel DELETE pages. */
 router.delete('/channel/:channelid', ctrlChannels.deleteChannel);
 router.delete('/', ctrlChannels.homelist); //This is for redirection
-
-/* Other pages */
-router.get('/about', ctrlOthers.about);
-
 
 module.exports = router;

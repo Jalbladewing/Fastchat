@@ -2,21 +2,6 @@ var channels = require('../models/channels');
 var mongoose = require('mongoose');
 var Cha = mongoose.model('Channel');
 
-var sendJSONresponse = function(res, status, content) {
-    res.status(status);
-    res.json(content);
-  };
-
-/* GET findOne. */
-module.exports.findOne = function(req, res) {
-    Cha.findOne().exec( function (err, channel) {
-        //sendJSONresponse(res, 200, location);
-        return res
-        .status(200)
-        .send(channel);
-    });
-};
-
 module.exports.channelsList = function(req, res) {
   Cha.find({}, function(err, channels) {
     if(err)
@@ -29,7 +14,7 @@ module.exports.channelsList = function(req, res) {
     {
       if(!channels)
       {
-        //Informar que locations está vacío
+        //Informar que channels está vacío
         return res
         .status(200)
         .send({message: 'No channels found'});
@@ -74,7 +59,7 @@ module.exports.channelsFindById = function(req, res) {
     {
       if(!channel)
       {
-        //Informar que location está vacío
+        //Informar que el canal está vacío
         return res
         .status(400)
         .send({message: 'Bad Request'});
@@ -100,7 +85,7 @@ module.exports.channelsUpdate = function(req, res) {
     {
       if(!channel)
       {
-        //Informar que location está vacío
+        //Informar que canal está vacío
         return res
         .status(400)
         .send({message: 'Bad Request'});
@@ -109,7 +94,7 @@ module.exports.channelsUpdate = function(req, res) {
         channel.name = req.body.name;
         channel.description = req.body.description;
 
-        channel.save(function(err, location) {
+        channel.save(function(err, channel) {
           if (err) 
           {
             return res

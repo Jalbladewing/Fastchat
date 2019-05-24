@@ -1,0 +1,394 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "description": "Documentación de Loc8r API",
+    "version": "1.0.0",
+    "title": "Loc8r REST API",
+    "termsOfService": "http://swagger.io/terms/",
+    "contact": {
+      "email": "apiteam@swagger.io"
+    },
+    "license": {
+      "name": "Apache 2.0",
+      "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
+    }
+  },
+  "host": "localhost:3000",
+  "basePath": "/api",
+  "tags": [
+    {
+      "name": "channel",
+      "description": "Todo sobre los canales del chat."
+    },
+    {
+      "name": "message",
+      "description": "Mensajes de los canales."
+    }
+  ],
+  "schemes": [
+    "http"
+  ],
+  "paths": {
+    "/channels": {
+      "get": {
+        "tags": [
+          "channel"
+        ],
+        "summary": "Obtener la lista de todos los canales.",
+        "operationId": "channelsList",
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "Operación correcta",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Channel"
+              }
+            }
+          },
+          "404": {
+            "description": "Error en la petición."
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "channel"
+        ],
+        "summary": "Crear un canal.",
+        "operationId": "channelsCreate",
+        "consumes": [
+          "application/x-www-form-urlencoded"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "name",
+            "in": "formData",
+            "description": "Nombre del canal a crear.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "description",
+            "in": "formData",
+            "description": "Descripción del canal a crear.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Operación correcta (Created)",
+            "schema": {
+              "$ref": "#/definitions/Channel"
+            }
+          },
+          "400": {
+            "description": "Error al guardar el canal."
+          }
+        }
+      }
+    },
+    "/channels/{channelid}": {
+      "get": {
+        "tags": [
+          "channel"
+        ],
+        "summary": "Busca un canal por su ID",
+        "operationId": "channelsFindById",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "channelid",
+            "in": "path",
+            "description": "Id del canal a devolver",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Operación correcta",
+            "schema": {
+              "$ref": "#/definitions/Channel"
+            }
+          },
+          "400": {
+            "description": "El canal está vacío."
+          },
+          "404": {
+            "description": "Canal no encontrado."
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "channel"
+        ],
+        "summary": "Editar un canal.",
+        "operationId": "channelsUpdate",
+        "consumes": [
+          "application/x-www-form-urlencoded"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "channelid",
+            "in": "path",
+            "description": "Id del canal a modificar.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "name",
+            "in": "formData",
+            "description": "Nuevo nombre del canal.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "description",
+            "in": "formData",
+            "description": "Nueva descripción del canal.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Operación correcta",
+            "schema": {
+              "$ref": "#/definitions/Channel"
+            }
+          },
+          "400": {
+            "description": "El canal está vacío o error al guardar el canal."
+          },
+          "404": {
+            "description": "Canal no encontrado."
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "channel"
+        ],
+        "summary": "Borra el canal por su ID",
+        "operationId": "channelsDelete",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "channelid",
+            "in": "path",
+            "description": "Id del canal a borrar.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Operación correcta (No Content)"
+          },
+          "404": {
+            "description": "Error al borrar el canal o canal no encontrado."
+          }
+        }
+      }
+    },
+    "/channels/{channelid}/messages": {
+      "get": {
+        "tags": [
+          "message"
+        ],
+        "summary": "Obtener la lista de todos los mensajes de un canal.",
+        "operationId": "messagesList",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "channelid",
+            "in": "path",
+            "description": "Id del canal de los mensajes a devolver.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Operación correcta",
+            "schema": {
+              "$ref": "#/definitions/Message"
+            }
+          },
+          "400": {
+            "description": "El canal no tiene mensajes."
+          },
+          "404": {
+            "description": "Canal no encontrado."
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "message"
+        ],
+        "summary": "Crea un mensaje en un canal.",
+        "operationId": "messagesCreate",
+        "consumes": [
+          "application/x-www-form-urlencoded"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "channelid",
+            "in": "path",
+            "description": "Id del canal donde se va a crear el mensaje.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "author",
+            "in": "formData",
+            "description": "Nombre del autor del mensaje a crear.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "messageText",
+            "in": "formData",
+            "description": "Texto del mensaje a crear.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Operación correcta (Created)",
+            "schema": {
+              "$ref": "#/definitions/Message"
+            }
+          },
+          "400": {
+            "description": "Error al crear el mensaje en el canal."
+          },
+          "404": {
+            "description": "Canal no encontrado."
+          }
+        }
+      }
+    },
+    "/channels/{channelid}/messages/{messageid}": {
+      "get": {
+        "tags": [
+          "message"
+        ],
+        "summary": "Busca un mensaje por su ID y el ID de su canal.",
+        "operationId": "messagesFindById",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "channelid",
+            "in": "path",
+            "description": "Id del canal del mensaje a devolver.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "messageid",
+            "in": "path",
+            "description": "Id del mensaje a devolver.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Operación correcta",
+            "schema": {
+              "$ref": "#/definitions/Channel"
+            }
+          },
+          "400": {
+            "description": "El canal no tiene mensajes o el mensaje está vacío."
+          },
+          "404": {
+            "description": "Canal no encontrado."
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Channel": {
+      "type": "object",
+      "required": [
+        "name",
+        "description"
+      ],
+      "properties": {
+        "name": {
+          "type": "string",
+          "example": "General"
+        },
+        "description": {
+          "type": "string",
+          "example": "Canal General de la aplicación."
+        },
+        "messages": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Message"
+          }
+        }
+      },
+      "xml": {
+        "name": "Channel"
+      }
+    },
+    "Message": {
+      "type": "object",
+      "required": [
+        "author",
+        "messageText"
+      ],
+      "properties": {
+        "author": {
+          "type": "string",
+          "example": "Pepito95"
+        },
+        "messageText": {
+          "type": "string",
+          "example": "Hola a todos!"
+        },
+        "createdOn": {
+          "type": "string",
+          "format": "Date"
+        }
+      },
+      "xml": {
+        "name": "Message"
+      }
+    }
+  },
+  "externalDocs": {
+    "description": "Find out more about Swagger",
+    "url": "http://swagger.io"
+  }
+}
